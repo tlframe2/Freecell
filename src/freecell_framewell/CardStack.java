@@ -10,7 +10,7 @@ public interface CardStack {
 	
 	public boolean cardCanBeRemoved();
 	
-	public void addCard();
+	public void addCard(Card card);
 	
 	public Card removeCard();
 

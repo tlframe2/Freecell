@@ -31,7 +31,7 @@ public class Foundation implements CardStack {
 	}
 
 	@Override
-	public void addCard() {
+	public void addCard(Card card) {
 		// TODO Auto-generated method stub
 		
 	}
