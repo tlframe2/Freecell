@@ -14,10 +14,8 @@ public class Foundation implements CardStack {
 		return size == 0;
 	}
 
-	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
