@@ -1,11 +1,15 @@
 package freecell_framewell;
 
+import java.util.ArrayDeque;
+
 public class Tableau implements CardStack {
 	
 	private int size;
+	private ArrayDeque<Card> tableauCards;
 	
 	public Tableau() {
 		this.size = 0;
+		this.tableauCards = new ArrayDeque<Card>();
 	}
 
 	public boolean isEmpty() {
@@ -17,19 +21,19 @@ public class Tableau implements CardStack {
 	}
 
 	@Override
-	public boolean cardCanBeAdded() {
+	public boolean canBeAdded(ArrayDeque<Card> cards) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean cardCanBeRemoved() {
+	public boolean canBeRemoved(Card card) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void addCard(Card card) {
+	public void addCard(ArrayDeque<Card> cards) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,14 +1,15 @@
 package freecell_framewell;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 public class Freecell implements CardStack {
 	
 	private int size;
-	private Stack<Card> freecellCards;
+	private ArrayDeque<Card> freecellCards;
 	
 	public Freecell() {
 		this.size = 0;
+		this.freecellCards = new ArrayDeque<Card>();
 	}
 
 	public boolean isEmpty() {
@@ -20,26 +21,27 @@ public class Freecell implements CardStack {
 	}
 
 	/**
-	 * Determines if Card object can be added to Freecell. Card can only be added to empty Freecells.
+	 * Determines if Card object can be legally added to Freecell
 	 * @return true if Card can be added to Freecell; otherwise false
 	 */
-	public boolean cardCanBeAdded() {
-		return isEmpty();
+	public boolean canBeAdded(ArrayDeque<Card> cards) {
+		return isEmpty() && cards.size() == 1;
 	}
 
 	/**
-	 * Determines if Card object can be removed from Freecell. Card must be in Freecell in order to be removed.
-	 * @return true if Card can be removed from Freecell; otherwise false;
+	 * Determines if Card object can be legally removed from Freecell
+	 * @return true if Card can be removed from Freecell; otherwise false
 	 */
-	public boolean cardCanBeRemoved() {
+	public boolean canBeRemoved(Card card) {
 		return !isEmpty();
 	}
 
 	/**
 	 * Adds Card object to Freecell
 	 */
-	public void addCard(Card card) {
-		freecellCards.push(card);
+	public void addCard(ArrayDeque<Card> cards) {
+		freecellCards.push(cards.pop());
+		size++;
 	}
 
 	/**
@@ -47,6 +49,7 @@ public class Freecell implements CardStack {
 	 * @return Card removed from Freecell
 	 */
 	public Card removeCard() {
+		size--;
 		return freecellCards.pop();
 	}
 
