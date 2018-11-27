@@ -18,7 +18,7 @@ public class Deck {
 	public Deck() {
 		
 		// creates cards with values 2-14 for each of the four suits
-		for (int i = 2; i <= 14; i++) {
+		for (int i = 1; i <= 13; i++) {
 			cards.add(new Card(i, Suit.Hearts));
 			cards.add(new Card(i, Suit.Diamonds));
 			cards.add(new Card(i, Suit.Spades));

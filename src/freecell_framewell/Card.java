@@ -85,7 +85,7 @@ public class Card {
 	 */
 	private void setName() {
 		
-		if (value == 14) {
+		if (value == 1) {
 			name = "Ace";
 		} else if (value == 11) {
 			name = "Jack";
