@@ -8,9 +8,9 @@ public class Driver {
 		Player testPlayer = new Player();
 		
 		testTable.printTable();
-		testPlayer.moveCards(testTable.getTableaux().get(0), testTable.getFreecell(0), 0);
+		testPlayer.moveCards(testTable.getTableaux().get(0), testTable.getFreecell(0), 6);
 		testTable.printTable();
-		testPlayer.moveCards(testTable.getTableaux().get(0), testTable.getFreecell(0), 0);
+		testPlayer.moveCards(testTable.getTableaux().get(0), testTable.getFreecell(0), 5);
 
 	}
 

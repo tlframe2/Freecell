@@ -70,8 +70,9 @@ public class Tableau implements CardStack {
 				removedCards.add(tableauCards.get(i));
 			}
 			tableauCards.removeAll(removedCards);
+			return removedCards;
 		}
-		
+	
 		return null;
 	}
 
