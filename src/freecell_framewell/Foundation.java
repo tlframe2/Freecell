@@ -4,22 +4,20 @@ import java.util.ArrayDeque;
 
 public class Foundation implements CardStack {
 	
-	private int size;
 	private Suit suit;
 	private ArrayDeque<Card> foundationCards;
 	
 	public Foundation(Suit suit) {
 		this.suit = suit;
-		this.size = 0;
 		this.foundationCards = new ArrayDeque<Card>();
 	}
 
 	public boolean isEmpty() {
-		return size == 0;
+		return foundationCards.isEmpty();
 	}
 
 	public int getSize() {
-		return size;
+		return foundationCards.size();
 	}
 
 	public boolean canBeAdded(ArrayDeque<Card> cards) {
@@ -43,10 +41,13 @@ public class Foundation implements CardStack {
 		
 	}
 
-	@Override
-	public Card removeCard() {
-		// TODO Auto-generated method stub
+	public ArrayDeque<Card> removeCards(int index) {
 		return null;
+	}
+
+	
+	public Card getTopCard() {
+		return foundationCards.getLast();
 	}
 
 }

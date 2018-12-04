@@ -14,6 +14,8 @@ public interface CardStack {
 	
 	public void addCard(ArrayDeque<Card> cards);
 	
-	public Card removeCard();
+	public ArrayDeque<Card> removeCards(int index);
+	
+	public Card getTopCard();
 
 }

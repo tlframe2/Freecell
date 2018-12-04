@@ -11,6 +11,7 @@ public class Card {
 	private Suit suit;
 	private boolean visible;
 	private String name;
+	private String color;
 	
 	/**
 	 * Default Card constructor; initializes with default values
@@ -21,6 +22,7 @@ public class Card {
 		suit = null;
 		visible = false;
 		name = null;
+		color = null;
 		
 	}
 	
@@ -36,6 +38,7 @@ public class Card {
 		visible = true;
 		
 		setName();
+		setColor();
 		
 	}
 	
@@ -63,6 +66,10 @@ public class Card {
 		return name;
 	}
 	
+	protected String getColor() {
+		return color;
+	}
+	
 	/**
 	 * Value mutator method
 	 * @param newValue value of card
@@ -78,6 +85,10 @@ public class Card {
 	 */
 	protected void setSuit(Suit newSuit) {
 		suit = newSuit;
+	}
+	
+	protected void setColor() {
+		color = (suit == Suit.Clubs || suit == Suit.Spades) ? "black" : "red";
 	}
 	
 	/**

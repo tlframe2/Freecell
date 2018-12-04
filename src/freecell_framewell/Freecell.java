@@ -4,20 +4,18 @@ import java.util.ArrayDeque;
 
 public class Freecell implements CardStack {
 	
-	private int size;
 	private ArrayDeque<Card> freecellCards;
 	
 	public Freecell() {
-		this.size = 0;
 		this.freecellCards = new ArrayDeque<Card>();
 	}
 
 	public boolean isEmpty() {
-		return size == 0;
+		return freecellCards.isEmpty();
 	}
 
 	public int getSize() {
-		return size;
+		return freecellCards.size();
 	}
 
 	/**
@@ -40,17 +38,27 @@ public class Freecell implements CardStack {
 	 * Adds Card object to Freecell
 	 */
 	public void addCard(ArrayDeque<Card> cards) {
-		freecellCards.push(cards.pop());
-		size++;
+		if (canBeAdded(cards)) {
+			freecellCards.push(cards.pop());
+		} else {
+			System.out.println("Can't move cards here");
+		}
 	}
 
 	/**
 	 * Removes Card object from Freecell
 	 * @return Card removed from Freecell
 	 */
-	public Card removeCard() {
-		size--;
-		return freecellCards.pop();
+	public ArrayDeque<Card> removeCards(int index) {
+		ArrayDeque<Card> removedCard = new ArrayDeque<Card>();
+		removedCard.add(freecellCards.pop());
+		return removedCard;
 	}
+	
+	
+	public Card getTopCard() {
+		return freecellCards.getLast();
+	}
+
 
 }
