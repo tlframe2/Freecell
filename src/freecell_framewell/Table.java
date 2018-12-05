@@ -76,6 +76,11 @@ public class Table {
 		}
 		
 	}
+	
+	public boolean hasWon() {
+		return getFoundation(0).getSize() == 13 && getFoundation(1).getSize() == 13 && 
+			   getFoundation(2).getSize() == 13 && getFoundation(3).getSize() == 13;
+	}
 
 	// Might not need these getters and setters but they're here just in case
 	public ArrayList<Freecell> getFreecells() {
