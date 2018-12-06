@@ -86,5 +86,5 @@ public class FreecellStartPage {
 		lblKing.setIcon(new ImageIcon(img2));
 		lblKing.setBounds(179, 31, 139, 123);
 		FrameWell_Freecell.getContentPane().add(lblKing);
-	}
+}
 }

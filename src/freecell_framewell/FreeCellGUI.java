@@ -140,11 +140,18 @@ public class FreeCellGUI {
 			}
 		});
 		
-		if (testTable.getTableaux().get(0).getTopCard().getValue() == (1|2|3|4|5|6|7|8|9|10|11|12|13))
+		
+		JLabel lblCardSpace2 = new JLabel("");
+		lblCardSpace2.setBounds(7, 98, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace2);
+		lblCardSpace2.setIcon(new ImageIcon(AOH));
+		if (testTable.getTableaux().get(0).getTopCard().getValue() == 1)
 		{
 			lblCardSpace1.setIcon(new ImageIcon(AOS));
 		}
-		
-		testTable.printTable();
+		else if(testTable.getTableaux().get(0).getTopCard().getValue() == 2)
+		{
+			
+		}
 	}
 }
