@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public class Table {
 	
-	//private ArrayList<CardStack> freecells;
-	//private ArrayList<CardStack> tableaux;
-	//private ArrayList<CardStack> foundations;
-	
 	private ArrayList<Freecell> freecells = new ArrayList<Freecell>(4);
 	private ArrayList<Foundation> foundations = new ArrayList<Foundation>(4);
 	private ArrayList<Tableau> tableaux = new ArrayList<Tableau>(8);
@@ -72,7 +68,7 @@ public class Table {
 			for (int j = 0; j < tableaux.get(i).getSize(); j++) {
 				System.out.println(tableaux.get(i).getTableau().get(j));
 			}
-			//System.out.println();
+			
 		}
 		
 	}
