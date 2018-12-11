@@ -80,5 +80,9 @@ public class Tableau implements CardStack {
 	public Card getTopCard() {
 		return tableauCards.get(tableauCards.size() - 1);
 	}
-
+	
+	public Card getTableauxCard(int i)
+	{
+		return tableauCards.get(tableauCards.size() - i);
+	}
 }
