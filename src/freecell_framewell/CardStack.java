@@ -1,7 +1,13 @@
 package freecell_framewell;
 
 import java.util.ArrayDeque;
-
+/**
+ * 
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the CardStack interface
+ * it is used with the Freecell, foundation, and tableau classes
+ *
+ */
 public interface CardStack {
 	
 	public boolean isEmpty();

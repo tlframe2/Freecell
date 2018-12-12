@@ -18,7 +18,7 @@ import java.awt.Font;
  * @author Tyrell Frame and Alex Sidwell
  * This is the FreeCellRules class
  * it is in charge of displaying the rules for the player to read
- *
+ *not fully implemented
  */
 public class FreeCellRules {
 

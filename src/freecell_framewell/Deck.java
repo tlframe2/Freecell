@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * Creates Deck object that represents a deck of playing cards
- * @author Tyrell Frame & Alex Sidwell
+ * @author Tyrell Frame and Alex Sidwell
  */
 public class Deck {
 	
@@ -13,7 +13,8 @@ public class Deck {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	
 	/**
-	 * Default Deck constructor; initializes ArrayList with 52 cards
+	 * This is the Default Deck constructor for the Deck class
+	 * it is in charge of initializing an ArrayList with 52 cards
 	 */
 	public Deck() {
 		
@@ -31,7 +32,8 @@ public class Deck {
 	}
 	
 	/**
-	 * Randomizes order of cards in Deck
+	 * This is the shuffle method for the deck class
+	 *it is in charge of randomizing the order of cards in the Deck
 	 */
 	public void shuffle() {
 		
@@ -40,7 +42,8 @@ public class Deck {
 	}
 	
 	/**
-	 * Removes card from "top" of Deck
+	 * This is the Deal method for the deck class
+	 *it is in charge of  Removing the "top" from the Deck and dealing it out
 	 * @return first Card object in ArrayList cards
 	 */
 	public Card deal() {
@@ -49,6 +52,11 @@ public class Deck {
 		
 	}
 	
+	/**
+	 * This is the size method for the deck class
+	 * it is in charge of getting the decks size
+	 * @return the size of the deck
+	 */
 	public int size() {
 		return cards.size();
 	}

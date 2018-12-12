@@ -2,7 +2,7 @@ package freecell_framewell;
 
 /**
  * Enum representing card suits
- * @author Tyrell Frame & Alex Sidwell
+ * @author Tyrell Frame and Alex Sidwell
  */
 public enum Suit {
 	

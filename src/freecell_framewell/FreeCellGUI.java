@@ -25,7 +25,7 @@ import java.awt.event.MouseMotionAdapter;
  * @author Tyrell Frame and Alex Sidwell
  * This is the FreeCellGUI class for the Freecell project
  * it is in charge of the gameboard and all of the rules associated with it
- * 
+ * not fully implemented
  */
 public class FreeCellGUI {
 

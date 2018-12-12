@@ -24,6 +24,7 @@ import java.awt.Window.Type;
  * @author Tyrell Frame and Alex Sidwell
  * This is the FreecellStartPage Class for the Freecell program
  * it is in charge of running the start page for the player
+ * not fully implemented
  */
 public class FreecellStartPage {
 

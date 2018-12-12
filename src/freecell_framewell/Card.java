@@ -2,7 +2,7 @@ package freecell_framewell;
 
 /**
  * Creates Card object that represents standard playing card
- * @author Tyrell Frame & Alex Sidwell
+ * @author Tyrell Frame and Alex Sidwell
  */
 public class Card {
 	

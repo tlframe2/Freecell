@@ -2,13 +2,23 @@ package freecell_framewell;
 
 import java.util.ArrayDeque;
 import java.util.Scanner;
-
+/**
+ * 
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the ConsoleGame class for the Freecell Program 
+ * it is in charge of creating the console game and the actions it performs
+ *
+ */
 public class ConsoleGame {
 	
 	Player player;
 	Table table;
 	Scanner scnr;
 
+	/**
+	 * This is the default constructor for the ConsoleGame class
+	 * it is in charge of creating a console game object
+	 */
 	public ConsoleGame() {
 		player = new Player();
 		table = new Table();
@@ -16,6 +26,10 @@ public class ConsoleGame {
 		startGame();
 	}
 	
+	/**
+	 * This is the StartGame method for the ConsoleGame class
+	 * it is in charge of starting the consoleGame
+	 */
 	public void startGame() {
 		
 		char runAgain = 'y';

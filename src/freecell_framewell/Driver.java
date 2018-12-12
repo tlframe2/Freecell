@@ -1,5 +1,12 @@
 package freecell_framewell;
 
+/**
+ * 
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the Driver for the Freecell Program 
+ * it is in charge of running the freecell game and testing its various classes
+ *
+ */
 public class Driver {
 
 	public static void main(String[] args) {
@@ -19,7 +26,7 @@ public class Driver {
 
 	}
 	
-	public static void test()
+	private static void test()
 	{
 		System.out.println("------------------------------------------------CARD TESTS------------------------------------------------");
 
