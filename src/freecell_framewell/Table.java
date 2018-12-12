@@ -43,7 +43,7 @@ public class Table {
 	
 	public void printTable() {
 		
-		System.out.println("Foundations");
+		System.out.println("\nFoundations");
 		for (int i = 0; i < foundations.size(); i++) {
 			if (foundations.get(i).isEmpty()) {
 				System.out.println("Empty");
@@ -52,7 +52,7 @@ public class Table {
 			}
 		}
 	
-		System.out.println("Freecells");
+		System.out.println("\nFreecells");
 		for (int i = 0; i < freecells.size(); i++) {
 			if (freecells.get(i).isEmpty()) {
 				System.out.println("Empty");
@@ -70,6 +70,8 @@ public class Table {
 			}
 			
 		}
+		
+		System.out.println();
 		
 	}
 	

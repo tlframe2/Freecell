@@ -33,7 +33,7 @@ public class ConsoleGame {
 			
 			table.printTable();
 			
-			System.out.println("Choose a source type: t = tableau, f = foundation, c = freecell");
+			System.out.println("Choose a source type: t = tableau, f = freecell");
 			
 			sourceType = scnr.next().charAt(0);
 			
@@ -51,7 +51,7 @@ public class ConsoleGame {
 				}
 				
 				if (sourceTab.canBeRemoved(cardIndex)) {
-					System.out.println("Choose a destination type: t = tableau, f = foundation, c = freecell");
+					System.out.println("Choose a destination type: t = tableau, o = foundation, f = freecell");
 					destinationType = scnr.next().charAt(0);
 					
 					if (destinationType == 't') {
@@ -64,8 +64,8 @@ public class ConsoleGame {
 						
 						player.moveCards(sourceTab, destTab, cardIndex);
 						
-					} else if (destinationType == 'f') {
-						while (destinationIndex < 0 || destinationIndex > 7) {
+					} else if (destinationType == 'o') {
+						while (destinationIndex < 0 || destinationIndex > 3) {
 							System.out.println("Choose a destination foundation (0-3): ");
 							destinationIndex = scnr.nextInt();
 						}
@@ -74,15 +74,15 @@ public class ConsoleGame {
 						
 						player.moveCards(sourceTab, destFound, cardIndex);
 						
-					} else if (destinationType == 'c') {
-						while (destinationIndex < 0 || destinationIndex > 7) {
+					} else if (destinationType == 'f') {
+						while (destinationIndex < 0 || destinationIndex > 3) {
 							System.out.println("Choose a destination freecell (0-3): ");
 							destinationIndex = scnr.nextInt();
 						}
 						
-						Freecell destFreecell = table.getFreecell(destinationIndex);
+						Freecell destFree = table.getFreecell(destinationIndex);
 						
-						player.moveCards(sourceTab, destFreecell, cardIndex);
+						player.moveCards(sourceTab, destFree, cardIndex);
 						
 					} // end destination t if
 					
@@ -93,6 +93,54 @@ public class ConsoleGame {
 			} 
 			
 			else if (sourceType == 'f') {
+				
+				while (sourceIndex < 0 || sourceIndex > 3) {
+					System.out.println("Choose a source freecell (0-3): ");
+					sourceIndex = scnr.nextInt();
+				}
+				
+				Freecell sourceFree = table.getFreecell(sourceIndex);
+				cardIndex = 0;
+				
+				if (sourceFree.canBeRemoved(cardIndex)) {
+					System.out.println("Choose a destination type: t = tableau, o = foundation, f = freecell");
+					destinationType = scnr.next().charAt(0);
+					
+					if (destinationType == 't') {
+						while (destinationIndex < 0 || destinationIndex > 7) {
+							System.out.println("Choose a destination tableau (0-7): ");
+							destinationIndex = scnr.nextInt();
+						}
+						
+						Tableau destTab = table.getTableau(destinationIndex);
+						
+						player.moveCards(sourceFree, destTab, cardIndex);
+						
+					} else if (destinationType == 'o') {
+						while (destinationIndex < 0 || destinationIndex > 3) {
+							System.out.println("Choose a destination foundation (0-3): ");
+							destinationIndex = scnr.nextInt();
+						}
+						
+						Foundation destFound = table.getFoundation(destinationIndex);
+						
+						player.moveCards(sourceFree, destFound, cardIndex);
+						
+					} else if (destinationType == 'f') {
+						while (destinationIndex < 0 || destinationIndex > 3) {
+							System.out.println("Choose a destination freecell (0-3): ");
+							destinationIndex = scnr.nextInt();
+						}
+						
+						Freecell destFree = table.getFreecell(destinationIndex);
+						
+						player.moveCards(sourceFree, destFree, cardIndex);
+						
+					} // end destination t if
+					
+				} else {
+					System.out.println("Cards can't be removed from source freecell, chief");
+				} // end can be removed if
 				
 				
 				
