@@ -43,21 +43,21 @@ public class Table {
 	
 	public void printTable() {
 		
+		System.out.println("Foundations");
 		for (int i = 0; i < foundations.size(); i++) {
 			if (foundations.get(i).isEmpty()) {
-				System.out.print("Empty ");
+				System.out.println("Empty");
 			} else {
-				System.out.print(foundations.get(i).getTopCard());
+				System.out.println(foundations.get(i).getTopCard());
 			}
 		}
-		
-		System.out.print("\t");
-		
+	
+		System.out.println("Freecells");
 		for (int i = 0; i < freecells.size(); i++) {
 			if (freecells.get(i).isEmpty()) {
-				System.out.print("Empty ");
+				System.out.println("Empty");
 			} else {
-				System.out.print(freecells.get(i).getTopCard());
+				System.out.println(freecells.get(i).getTopCard());
 			}
 		}
 		

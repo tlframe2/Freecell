@@ -13,6 +13,9 @@ public class Driver {
 		testPlayer.moveCards(testTable.getTableau(0), testTable.getFreecell(0), 5);
 		
 		test();
+		
+		ConsoleGame newGame = new ConsoleGame();
+		newGame.startGame();
 
 	}
 	

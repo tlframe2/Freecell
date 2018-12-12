@@ -2,10 +2,13 @@ package freecell_framewell;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tableau implements CardStack {
 	
-	private ArrayList<Card> tableauCards;
+	//private ArrayList<Card> tableauCards;
+	private List<Card> tableauCards;
+	//private ArrayDeque<Card> tempRemovedCards;
 	
 	public Tableau() {
 		this.tableauCards = new ArrayList<Card>();
@@ -19,11 +22,14 @@ public class Tableau implements CardStack {
 		return tableauCards.size();
 	}
 	
-	public ArrayList<Card> getTableau() {
+//	public ArrayList<Card> getTableau() {
+//		return tableauCards;
+//	}
+	
+	public List<Card> getTableau() {
 		return tableauCards;
 	}
 
-	
 	public boolean canBeAdded(ArrayDeque<Card> cards) {
 		Card topTableau = tableauCards.get(tableauCards.size() - 1);
 		Card firstCard = cards.getFirst();
@@ -31,11 +37,11 @@ public class Tableau implements CardStack {
 		return (firstCard.getValue() == topTableau.getValue() - 1 && !firstCard.getColor().equals(topTableau.getColor())) || isEmpty();
 	}
 
-	@Override
-	public boolean canBeRemoved(Card card) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean canBeRemoved(Card card) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 	
 	public boolean canBeRemoved(int index) {
 		
@@ -64,19 +70,15 @@ public class Tableau implements CardStack {
 	}
 
 	public ArrayDeque<Card> removeCards(int index) {
-		if (canBeRemoved(index)) {
-			ArrayDeque<Card> removedCards = new ArrayDeque<Card>();
-			for (int i = index; i < tableauCards.size(); i++) {
-				removedCards.add(tableauCards.get(i));
-			}
-			tableauCards.removeAll(removedCards);
-			return removedCards;
+
+		ArrayDeque<Card> removedCards = new ArrayDeque<Card>();
+		for (int i = index; i < tableauCards.size(); i++) {
+			removedCards.add(tableauCards.get(i));
 		}
-	
-		return null;
+		
+		return removedCards;
 	}
 
-	@Override
 	public Card getTopCard() {
 		return tableauCards.get(tableauCards.size() - 1);
 	}
@@ -84,5 +86,9 @@ public class Tableau implements CardStack {
 	public Card getTableauxCard(int i)
 	{
 		return tableauCards.get(tableauCards.size() - i);
+	}
+
+	public void finalizeRemoval(int index) {
+		tableauCards = tableauCards.subList(0, index);
 	}
 }

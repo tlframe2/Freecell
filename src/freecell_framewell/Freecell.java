@@ -30,7 +30,7 @@ public class Freecell implements CardStack {
 	 * Determines if Card object can be legally removed from Freecell
 	 * @return true if Card can be removed from Freecell; otherwise false
 	 */
-	public boolean canBeRemoved(Card card) {
+	public boolean canBeRemoved(int index) {
 		return !isEmpty();
 	}
 
@@ -58,6 +58,10 @@ public class Freecell implements CardStack {
 	
 	public Card getTopCard() {
 		return freecellCards.getLast();
+	}
+
+	public void finalizeRemoval(int index) {
+		freecellCards.clear();
 	}
 
 
