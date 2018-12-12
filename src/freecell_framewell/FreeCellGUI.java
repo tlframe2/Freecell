@@ -1,5 +1,6 @@
 package freecell_framewell;
 
+
 import java.awt.EventQueue;
 import java.awt.Image;
 
@@ -12,22 +13,31 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JPanel;
+import java.awt.event.MouseMotionAdapter;
 
-
+/**
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the FreeCellGUI class for the Freecell project
+ * it is in charge of the gameboard and all of the rules associated with it
+ * 
+ */
 public class FreeCellGUI {
 
 	private JFrame frmFreecell;
 	private int X,Y;
 	private static Table testTable = new Table();
 	private Player testPlayer = new Player();
+	private boolean drag = false;
 	
-	/**
-	 * Launch the application.
-	 */
+	
+	 // Launch the application.
+	 
 	
 	private Card aoc = new Card();
 	private Tableau tab = new Tableau();
@@ -45,20 +55,21 @@ public class FreeCellGUI {
 	}
 
 	/**
-	 * Create the application.
+	 * This is the FreeCellGUI constructor
+	 * it is in charge of running building the game
 	 */
 	public FreeCellGUI() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	//  Initialize the contents of the frame.
+	 
 	private void initialize() {
 		frmFreecell = new JFrame();
 		frmFreecell.setTitle("Freecell");
 		frmFreecell.getContentPane().setBackground(Color.GREEN);
-		frmFreecell.setBounds(100, 100, 773, 464);
+		frmFreecell.setBounds(100, 100, 827, 532);
 		frmFreecell.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFreecell.getContentPane().setLayout(null);
 		testTable.dealCards();
@@ -74,7 +85,7 @@ public class FreeCellGUI {
 		Image img = new ImageIcon(this.getClass().getResource("/PlayingCard.png")).getImage();
 		btnRules.setIcon(new ImageIcon(img));
 		btnRules.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		btnRules.setBounds(668, 389, 91, 35);
+		btnRules.setBounds(720, 457, 91, 35);
 		frmFreecell.getContentPane().add(btnRules);
 		
 		JButton btnQuit = new JButton("Quit");
@@ -84,60 +95,38 @@ public class FreeCellGUI {
 			}
 		});
 		btnQuit.setIcon(new ImageIcon(img));
-		btnQuit.setBounds(338, 390, 105, 35);
+		btnQuit.setBounds(339, 458, 105, 35);
 		frmFreecell.getContentPane().add(btnQuit);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(7, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(81, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(155, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(229, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_3);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.WHITE);
-		panel_4.setBounds(683, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_4);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(610, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_5);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(Color.WHITE);
-		panel_6.setBounds(536, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_6);
-		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.WHITE);
-		panel_7.setBounds(462, 0, 64, 64);
-		frmFreecell.getContentPane().add(panel_7);
-		
 		JLabel lblCardSpace1 = new JLabel("");
+		lblCardSpace1.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				if(testTable.getTableau(0).canBeRemoved(6))
+				{
+					JComponent j = (JComponent)e.getSource();
+					j.setLocation(j.getX() + e.getX(), j.getY() + e.getY() );
+				}
+			}
+		});
 		lblCardSpace1.setBounds(7, 307, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace1);
 		
 		lblCardSpace1.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent arg0) {
-				X = arg0.getX();
-				Y = arg0.getY();
+			public void mousePressed(MouseEvent e) {
+				if(e.getSource() == lblCardSpace1) {
+					drag = true;
+				}
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				drag = false;
+				
 			}
 		});
+		
+	
 		
 		JLabel lblCardSpace3 = new JLabel("");
 		lblCardSpace3.setBounds(155, 307, 64, 64);
@@ -148,6 +137,12 @@ public class FreeCellGUI {
 		frmFreecell.getContentPane().add(lblCardSpace2);
 		
 		JLabel lblCardSpace4 = new JLabel("");
+		lblCardSpace4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+		});
 		lblCardSpace4.setBounds(229, 307, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace4);
 		
@@ -205,19 +200,19 @@ public class FreeCellGUI {
 		lblCardSpace4.setIcon(new ImageIcon(imgFile));
 		
 		JLabel lblCardSpace5 = new JLabel("");
-		lblCardSpace5.setBounds(462, 307, 64, 64);
+		lblCardSpace5.setBounds(462, 277, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace5);
 		
 		JLabel lblCardSpace6 = new JLabel("");
-		lblCardSpace6.setBounds(536, 307, 64, 64);
+		lblCardSpace6.setBounds(536, 277, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace6);
 		
 		JLabel lblCardSpace7 = new JLabel("");
-		lblCardSpace7.setBounds(610, 307, 64, 64);
+		lblCardSpace7.setBounds(610, 277, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace7);
 		
 		JLabel lblCardSpace8 = new JLabel("");
-		lblCardSpace8.setBounds(683, 307, 64, 64);
+		lblCardSpace8.setBounds(683, 277, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace8);
 		
 		cardName = testTable.getTableaux().get(4).getTopCard().getName().substring(0, 1);
@@ -341,19 +336,19 @@ public class FreeCellGUI {
 		lblCardSpace12.setIcon(new ImageIcon(imgFile));
 		
 		JLabel lblCardSpace13 = new JLabel("");
-		lblCardSpace13.setBounds(462, 277, 64, 64);
+		lblCardSpace13.setBounds(462, 244, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace13);
 		
 		JLabel lblCardSpace14 = new JLabel("");
-		lblCardSpace14.setBounds(536, 277, 64, 64);
+		lblCardSpace14.setBounds(536, 244, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace14);
 		
 		JLabel lblCardSpace15 = new JLabel("");
-		lblCardSpace15.setBounds(610, 277, 64, 64);
+		lblCardSpace15.setBounds(610, 244, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace15);
 		
 		JLabel lblCardSpace16 = new JLabel("");
-		lblCardSpace16.setBounds(683, 277, 64, 64);
+		lblCardSpace16.setBounds(683, 244, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace16);
 		
 		cardName = testTable.getTableaux().get(4).getTableauxCard(2).getName().substring(0, 1);
@@ -477,7 +472,7 @@ public class FreeCellGUI {
 		lblCardSpace20.setIcon(new ImageIcon(imgFile));
 		
 		JLabel lblCardSpace21 = new JLabel("");
-		lblCardSpace21.setBounds(462, 244, 64, 64);
+		lblCardSpace21.setBounds(462, 211, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace21);
 			
 		cardName = testTable.getTableaux().get(4).getTableauxCard(3).getName().substring(0, 1);
@@ -494,15 +489,15 @@ public class FreeCellGUI {
 		lblCardSpace21.setIcon(new ImageIcon(imgFile));
 		
 		JLabel lblCardSpace22 = new JLabel("");
-		lblCardSpace22.setBounds(536, 244, 64, 64);
+		lblCardSpace22.setBounds(536, 211, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace22);
 		
 		JLabel lblCardSpace23 = new JLabel("");
-		lblCardSpace23.setBounds(610, 244, 64, 64);
+		lblCardSpace23.setBounds(610, 211, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace23);
 		
 		JLabel lblCardSpace24 = new JLabel("");
-		lblCardSpace24.setBounds(683, 244, 64, 64);
+		lblCardSpace24.setBounds(683, 211, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace24);
 		
 		cardName = testTable.getTableaux().get(5).getTableauxCard(3).getName().substring(0, 1);
@@ -613,19 +608,19 @@ public class FreeCellGUI {
 		lblCardSpace28.setIcon(new ImageIcon(imgFile));
 		
 		JLabel lblCardSpace29 = new JLabel("");
-		lblCardSpace29.setBounds(462, 211, 64, 64);
+		lblCardSpace29.setBounds(462, 178, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace29);
 		
 		JLabel lblCardSpace30 = new JLabel("");
-		lblCardSpace30.setBounds(536, 211, 64, 64);
+		lblCardSpace30.setBounds(536, 178, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace30);
 		
 		JLabel lblCardSpace31 = new JLabel("");
-		lblCardSpace31.setBounds(610, 211, 64, 64);
+		lblCardSpace31.setBounds(610, 178, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace31);
 		
 		JLabel lblCardSpace32 = new JLabel("");
-		lblCardSpace32.setBounds(683, 211, 64, 64);
+		lblCardSpace32.setBounds(683, 178, 64, 64);
 		frmFreecell.getContentPane().add(lblCardSpace32);
 		
 		cardName = testTable.getTableaux().get(4).getTableauxCard(4).getName().substring(0, 1);
@@ -748,6 +743,326 @@ public class FreeCellGUI {
 		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
 		lblCardSpace36.setIcon(new ImageIcon(imgFile));
 		
+		JLabel lblCardSpace40 = new JLabel("");
+		lblCardSpace40.setBounds(683, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace40);
+		
+		JLabel lblCardSpace38 = new JLabel("");
+		lblCardSpace38.setBounds(536, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace38);
+		
+		JLabel lblCardSpace39 = new JLabel("");
+		lblCardSpace39.setBounds(610, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace39);
+		
+		JLabel lblCardSpace37 = new JLabel("");
+		lblCardSpace37.setBounds(462, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace37);
+		
+		cardName = testTable.getTableaux().get(4).getTableauxCard(5).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(4).getTableauxCard(5).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace37.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(5).getTableauxCard(5).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(5).getTableauxCard(5).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace38.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(6).getTableauxCard(5).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(6).getTableauxCard(5).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace39.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(7).getTableauxCard(5).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(7).getTableauxCard(5).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace40.setIcon(new ImageIcon(imgFile));
+		
+		JLabel lblCardSpace41 = new JLabel("");
+		lblCardSpace41.setBounds(7, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace41);
+		
+		JLabel lblCardSpace42 = new JLabel("");
+		lblCardSpace42.setBounds(81, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace42);
+		
+		JLabel lblCardSpace43 = new JLabel("");
+		lblCardSpace43.setBounds(155, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace43);
+		
+		JLabel lblCardSpace44 = new JLabel("");
+		lblCardSpace44.setBounds(229, 145, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace44);
+		
+		JLabel lblCardSpace45 = new JLabel("");
+		lblCardSpace45.setBounds(462, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace45);
+		
+		JLabel lblCardSpace46 = new JLabel("");
+		lblCardSpace46.setBounds(536, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace46);
+		
+		JLabel lblCardSpace47 = new JLabel("");
+		lblCardSpace47.setBounds(610, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace47);
+		
+		JLabel lblCardSpace48 = new JLabel("");
+		lblCardSpace48.setBounds(683, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace48);
+		
+		
+		cardName = testTable.getTableaux().get(0).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(0).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace41.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(1).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(1).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace42.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(2).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(2).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace43.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(3).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(3).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace44.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(4).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(4).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace45.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(5).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(5).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace46.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(6).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(6).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace47.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(7).getTableauxCard(6).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(7).getTableauxCard(6).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace48.setIcon(new ImageIcon(imgFile));
+		
+		JLabel lblCardSpace49 = new JLabel("");
+		lblCardSpace49.setBounds(7, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace49);
+		
+		JLabel lblCardSpace50 = new JLabel("");
+		lblCardSpace50.setBounds(81, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace50);
+		
+		JLabel lblCardSpace51 = new JLabel("");
+		lblCardSpace51.setBounds(155, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace51);
+		
+		JLabel lblCardSpace52 = new JLabel("");
+		lblCardSpace52.setBounds(229, 112, 64, 64);
+		frmFreecell.getContentPane().add(lblCardSpace52);
+		
+		cardName = testTable.getTableaux().get(0).getTableauxCard(7).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(0).getTableauxCard(7).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace49.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(1).getTableauxCard(7).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(1).getTableauxCard(7).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace50.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(2).getTableauxCard(7).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(2).getTableauxCard(7).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace51.setIcon(new ImageIcon(imgFile));
+		
+		cardName = testTable.getTableaux().get(3).getTableauxCard(7).getName().substring(0, 1);
+		cardSuit = testTable.getTableaux().get(3).getTableauxCard(7).getSuit().toString().substring(0, 1);
+		if(cardName.equals("A")) {
+			imgFileName = "/" + cardName + "O" + cardSuit + ".png";
+		}
+		else if(cardName.equals("1")) {
+            imgFileName = "/" + cardName + "0" + cardSuit + ".png";
+        } else {
+            imgFileName = "/" + cardName + cardSuit + ".png";
+        }
+		imgFile = new ImageIcon(this.getClass().getResource(imgFileName)).getImage();
+		lblCardSpace52.setIcon(new ImageIcon(imgFile));
+		
+		JLabel lblFoundation1 = new JLabel("");
+		Image heart = new ImageIcon(this.getClass().getResource("/HeartFoundation.png")).getImage();
+		lblFoundation1.setIcon(new ImageIcon(heart));
+		lblFoundation1.setBounds(462, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFoundation1);
+		
+		JLabel lblFoundation2 = new JLabel("");
+		Image Spade = new ImageIcon(this.getClass().getResource("/SpadesFoundation.png")).getImage();
+		lblFoundation2.setIcon(new ImageIcon(Spade));
+		lblFoundation2.setBounds(536, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFoundation2);
+		
+		JLabel lblFoundation3 = new JLabel("");
+		Image diamond = new ImageIcon(this.getClass().getResource("/DiamondsFoundation.png")).getImage();
+		lblFoundation3.setIcon(new ImageIcon(diamond));
+		lblFoundation3.setBounds(609, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFoundation3);
+		
+		JLabel lblFoundation4 = new JLabel("");
+		Image club = new ImageIcon(this.getClass().getResource("/ClubsFoundation.png")).getImage();
+		lblFoundation4.setIcon(new ImageIcon(club));
+		lblFoundation4.setBounds(683, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFoundation4);
+		
+		JLabel lblFreecell1 = new JLabel("");
+		Image f = new ImageIcon(this.getClass().getResource("/f.png")).getImage();
+		lblFreecell1.setIcon(new ImageIcon(f));
+		lblFreecell1.setBounds(7, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFreecell1);
+		
+		JLabel lblFreecell2 = new JLabel("");
+		Image r = new ImageIcon(this.getClass().getResource("/r.png")).getImage();
+		lblFreecell2.setIcon(new ImageIcon(r));
+		lblFreecell2.setBounds(81, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFreecell2);
+		
+		JLabel lblFreecell3 = new JLabel("");
+		Image e = new ImageIcon(this.getClass().getResource("/e.png")).getImage();
+		lblFreecell3.setIcon(new ImageIcon(e));
+		lblFreecell3.setBounds(155, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFreecell3);
+		
+		JLabel lblFreecell4 = new JLabel("");
+		lblFreecell4.setIcon(new ImageIcon(e));
+		lblFreecell4.setBounds(229, 0, 64, 64);
+		frmFreecell.getContentPane().add(lblFreecell4);
+	
 		testTable.printTable();
 		
 	}
