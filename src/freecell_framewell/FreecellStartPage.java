@@ -19,13 +19,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 
+/**
+ * 
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the FreecellStartPage Class for the Freecell program
+ * it is in charge of running the start page for the player
+ */
 public class FreecellStartPage {
 
 	private JFrame FrameWell_Freecell;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,15 +43,13 @@ public class FreecellStartPage {
 	}
 
 	/**
-	 * Create the application.
+	 * This is the constructor for the FreecellStartPage class
+	 * it is in charge of initializing the contents of the frame
 	 */
 	public FreecellStartPage() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		FrameWell_Freecell = new JFrame();
 		FrameWell_Freecell.setTitle("FrameWell_FreeCell");

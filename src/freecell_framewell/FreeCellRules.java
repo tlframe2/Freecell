@@ -13,6 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
+/**
+ * 
+ * @author Tyrell Frame and Alex Sidwell
+ * This is the FreeCellRules class
+ * it is in charge of displaying the rules for the player to read
+ *
+ */
 public class FreeCellRules {
 
 	private JFrame rules;
@@ -34,15 +41,16 @@ public class FreeCellRules {
 	}
 
 	/**
-	 * Create the application.
+	 * This is the FreeCellRules constructor
+	 * it is in charge of initializing the contents of the frame
 	 */
 	public FreeCellRules() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	//  Initialize the contents of the frame.
+	 
 	private void initialize() {
 		rules = new JFrame();
 		rules.setTitle("Rules");
